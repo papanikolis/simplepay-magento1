@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <modules>
+        <SimplePay_SimplePay>
+            <version>1.0.0</version>
+        </SimplePay_SimplePay>
+    </modules>
+
+    <global>
+        <models>
+            <simplepay>
+                <class>SimplePay_SimplePay_Model</class>
+            </simplepay>
+        </models>
+
+        <helpers>
+            <simplepay>
+                <class>SimplePay_SimplePay_Helper</class>
+            </simplepay>
+        </helpers>
+    </global>
+
+    <default>
+        <payment>
+            <simplepay>
+                <active>1</active>
+                <model>simplepay/payment</model>
+
+                <test_mode>0</test_mode>
+                <payment_action>authorize_capture</payment_action>
+                <title>Master Card, Visa and Verve (Processed securely by SimplePay)</title>
+            </simplepay>
+        </payment>
+    </default>
+
+    <frontend>
+        <routers>
+            <simplepay>
+                <use>standard</use>
+                <args>
+                    <module>SimplePay_SimplePay</module>
+                    <frontName>simplepay</frontName>
+                </args>
+            </simplepay>
+        </routers>
+        <layout>
+            <updates>
+                <simplepay>
+                    <file>simplepay.xml</file>
+                </simplepay>
+            </updates>
+        </layout>
+    </frontend>
+</config>

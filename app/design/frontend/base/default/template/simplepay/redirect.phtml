@@ -1,0 +1,32 @@
+<h2><?php echo $this->__('Your order is being processed') ?></h2>
+<?php
+$order = new Mage_Sales_Model_Order();
+$orderId = Mage::getSingleton('checkout/session')->getLastRealOrderId();
+$order->loadByIncrementId($orderId);
+?>
+
+<script type="text/javascript">
+    //<![CDATA[
+    var token = sessionStorage.token;
+    sessionStorage.clear();
+
+    var form = document.createElement('form');
+    form.setAttribute('method', 'post');
+    form.setAttribute('action', '<?php echo Mage::helper('simplepay')->getPaymentGatewayUrl(); ?>');
+
+    var formInputToken = document.createElement('input');
+    formInputToken.setAttribute('type', 'hidden');
+    formInputToken.setAttribute('name', 'token');
+    formInputToken.value = token;
+
+    var formInputOrderId = document.createElement('input');
+    formInputOrderId.setAttribute('type', 'hidden');
+    formInputOrderId.setAttribute('name', 'orderId');
+    formInputOrderId.value = '<?php echo $orderId; ?>';
+
+    form.appendChild(formInputToken);
+    form.appendChild(formInputOrderId);
+
+    form.submit();
+    //]]>
+</script>
